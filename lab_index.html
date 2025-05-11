@@ -73,6 +73,21 @@
       left: 0;
     }
   </style>
+  <script src="coinEngine.js"></script>
+<style>
+  .coin-animate {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: gold;
+    font-size: 20px;
+    animation: popUp 1s ease-out forwards;
+  }
+  @keyframes popUp {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+  }
+</style>
 </head>
 <body>
   <h1>Science Lab</h1>
