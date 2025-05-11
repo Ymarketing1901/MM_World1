@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hospital - Math Magic</title>
+  <script src="coinEngine.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url('HospitalF.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+      color: white;
+      font-weight: bold;
+    }
+
+    #coin-box {
+      position: relative;
+    }
+
+    .coin-animate {
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: gold;
+      font-size: 20px;
+      animation: popUp 1s ease-out forwards;
+    }
+
+    @keyframes popUp {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-20px); }
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 4px #000;
+      font-size: 36px;
+      margin-top: 10px;
+    }
+
+    .question-container {
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .option {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #f47e60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      width: 200px;
+      cursor: pointer;
+    }
+
+    #feedback {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    #lab-link {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #fff;
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    #lab-link img {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="correct-counter">Correct: 0/50</div>
+    <div id="coin-box">Coins: 0</div>
+  </header>
+  <h1>Hospital</h1>
+
+  <div class="question-container">
+    <div id="question-box">Loading...</div>
+    <div id="options-box"></div>
+    <div id="feedback"></div>
+  </div>
+
+  <a id="lab-link" href="lab_index.html">
+    <img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-science-lab-education-flatart-icons-outline-flatarticons.png" alt="Lab Icon" />
+    Enter Science Lab
+  </a>
+
+  <script>
+    const grade = parseInt(localStorage.getItem("mathMagicGrade") || "1");
+    const land = parseInt(localStorage.getItem("mathMagicLand") || "1");
+    const difficulty = Math.min(Math.max(land, 1), 5);
+
+    let score = 0;
+    let correctAnswers = 0;
+    let coins = loadCoins();
+    let current;
+    let attempt = 0;
+
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateQuestion() {
+      const a = randomInt(10, 99);
+      const b = randomInt(10, 99);
+      const answer = a + b;
+      const decoys = new Set([answer + 10, answer - 10]);
+      while (decoys.size < 3) {
+        const offset = Math.floor(Math.random() * 11) - 5;
+        const decoy = answer + offset;
+        if (decoy !== answer && decoy > 0) decoys.add(decoy);
+      }
+      const options = Array.from(decoys);
+      options.push(answer);
+      return {
+        text: `What is ${a} + ${b}?`,
+        options: options.sort(() => Math.random() - 0.5),
+        answer: answer.toString()
+      };
+    }
+
+    function showQuestion() {
+      if (correctAnswers >= 50) {
+        document.getElementById("question-box").textContent = "You've completed all questions!";
+        document.getElementById("options-box").innerHTML = "";
+        document.getElementById("lab-link").style.display = "flex";
+        return;
+      }
+
+      attempt = 0;
+      current = generateQuestion();
+      document.getElementById("question-box").textContent = current.text;
+      const box = document.getElementById("options-box");
+      box.innerHTML = "";
+      current.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt);
+        box.appendChild(btn);
+      });
+      document.getElementById("feedback").textContent = "";
+    }
+
+    function checkAnswer(selected) {
+      const feedback = document.getElementById("feedback");
+      if (selected == current.answer) {
+        if (attempt === 0) {
+          score++;
+          correctAnswers++;
+          addCoins(2);
+          coins = loadCoins();
+          document.getElementById("correct-counter").textContent = `Correct: ${correctAnswers}/50`;
+          const coinBox = document.getElementById("coin-box");
+          const coinPlus = document.createElement("div");
+          coinPlus.className = "coin-animate";
+          coinPlus.textContent = "+2";
+          coinBox.appendChild(coinPlus);
+          setTimeout(() => coinPlus.remove(), 1000);
+          coinBox.textContent = `Coins: ${coins}`;
+          if (correctAnswers >= 20) {
+            document.getElementById("lab-link").style.display = "flex";
+          }
+        }
+        feedback.textContent = "Correct!";
+        setTimeout(showQuestion, 1000);
+      } else {
+        if (attempt === 0) {
+          feedback.textContent = `Oops! The answer was ${current.answer}.`;
+          setTimeout(showQuestion, 2000);
+        }
+      }
+      attempt++;
+    }
+
+    document.getElementById("correct-counter").textContent = `Correct: ${correctAnswers}/50`;
+    document.getElementById("coin-box").textContent = `Coins: ${coins}`;
+    showQuestion();
+  </script>
+</body>
+</html>
