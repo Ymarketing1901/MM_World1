@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Magic - Player Home</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    #home {
+      position: relative;
+      width: 768px;
+      height: 1152px;
+      background-image: url('woodland_home_bg.png'); /* Replace with your background */
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .furniture {
+      position: absolute;
+      image-rendering: pixelated;
+    }
+    #couch {
+      left: 60px;
+      top: 880px;
+      width: 180px;
+    }
+    #table {
+      left: 240px;
+      top: 940px;
+      width: 150px;
+    }
+    #console {
+      left: 270px;
+      top: 930px;
+      width: 50px;
+    }
+    #tvstand {
+      left: 460px;
+      top: 890px;
+      width: 160px;
+    }
+    #tv {
+      left: 475px;
+      top: 800px;
+      width: 140px;
+    }
+    #plant {
+      left: 500px;
+      top: 870px;
+      width: 90px;
+    }
+    #frame {
+      left: 540px;
+      top: 420px;
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div id="home">
+    <img src="couch.png" class="furniture" id="couch">
+    <img src="coffee_table.png" class="furniture" id="table">
+    <img src="console.png" class="furniture" id="console">
+    <img src="tv_stand.png" class="furniture" id="tvstand">
+    <img src="tv.png" class="furniture" id="tv">
+    <img src="plant.png" class="furniture" id="plant">
+    <img src="frame.png" class="furniture" id="frame">
+  </div>
+</body>
+</html>
