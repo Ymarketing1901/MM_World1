@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hospital - Math Magic</title>
   <script src="coinEngine.js"></script>
+  <script src="saveEngine.js"></script>
   <style>
     body {
       margin: 0;
@@ -113,7 +114,7 @@
   </div>
 
   <a id="lab-link" href="lab_index.html">
-    <img src="Lab-link.png" alt="Lab Icon" />
+    <img src="lab-link.png" alt="Lab Icon" />
     Enter Science Lab
   </a>
 
@@ -121,9 +122,10 @@
     const grade = parseInt(localStorage.getItem("mathMagicGrade") || "1");
     const land = parseInt(localStorage.getItem("mathMagicLand") || "1");
     const difficulty = Math.min(Math.max(land, 1), 5);
+    const save = getSave();
 
     let score = 0;
-    let correctAnswers = 0;
+    let correctAnswers = save.hospitalProgress?.[land]?.correct || 0;
     let coins = loadCoins();
     let current;
     let attempt = 0;
@@ -181,6 +183,7 @@
           score++;
           correctAnswers++;
           addCoins(2);
+          logProgress("hospital", land, correctAnswers);
           coins = loadCoins();
           document.getElementById("correct-counter").textContent = `Correct: ${correctAnswers}/50`;
           const coinBox = document.getElementById("coin-box");
@@ -207,7 +210,10 @@
 
     document.getElementById("correct-counter").textContent = `Correct: ${correctAnswers}/50`;
     document.getElementById("coin-box").textContent = `Coins: ${coins}`;
+    if (correctAnswers >= 20) {
+      document.getElementById("lab-link").style.display = "flex";
+    }
     showQuestion();
   </script>
 </body>
-</html>
+</html> 
