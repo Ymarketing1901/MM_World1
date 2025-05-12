@@ -25,48 +25,62 @@
   background-position: center;
 }
 
-.furniture {
+.slot {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.slot img {
+  width: 100%;
+  height: auto;
   image-rendering: pixelated;
 }
 
-#couch {
-  left: 9.77%;
-  top: 57.29%;
-  width: 22.46%;
+#slot-couch {
+  left: 6.84%;
+  top: 49.48%;
+  width: 29.30%;
+  height: 12.37%;
 }
 
-#table {
-  left: 23.44%;
-  top: 61.2%;
-  width: 14.65%;
+#slot-table {
+  left: 30.27%;
+  top: 59.90%;
+  width: 16.60%;
+  height: 6.51%;
 }
 
-#console {
-  left: 26.37%;
-  top: 60.54%;
-  width: 4.88%;
+#slot-console {
+  left: 34.18%;
+  top: 60.87%;
+  width: 5.86%;
+  height: 2.60%;
 }
 
-#tvstand {
-  left: 44.92%;
-  top: 57.94%;
-  width: 15.63%;
+#slot-tvstand {
+  left: 48.83%;
+  top: 59.90%;
+  width: 18.55%;
+  height: 7.16%;
 }
 
-#tv {
-  left: 46.39%;
-  top: 52.08%;
+#slot-tv {
+  left: 50.78%;
+  top: 53.39%;
   width: 13.67%;
+  height: 6.51%;
 }
 
-#plant {
+#slot-plant {
   left: 48.83%;
   top: 56.64%;
   width: 8.79%;
 }
 
-#frame {
+#slot-frame {
   left: 52.73%;
   top: 27.34%;
   width: 9.77%;
@@ -76,13 +90,13 @@
 </head>
 <body>
   <div id="home">
-    <img src="couch.png" class="furniture" id="couch" alt="Couch">
-    <img src="coffee_table.png" class="furniture" id="table" alt="Table">
-    <img src="console.png" class="furniture" id="console" alt="Console">
-    <img src="tv_stand.png" class="furniture" id="tvstand" alt="TV Stand">
-    <img src="tv.png" class="furniture" id="tv" alt="TV">
-    <img src="plant.png" class="furniture" id="plant" alt="Plant">
-    <img src="frame.png" class="furniture" id="frame" alt="Wall Frame">
+    <div class="slot" id="slot-couch"><img src="couch.png" alt="Couch"></div>
+    <div class="slot" id="slot-table"><img src="coffee_table.png" alt="Table"></div>
+    <div class="slot" id="slot-console"><img src="console.png" alt="Console"></div>
+    <div class="slot" id="slot-tvstand"><img src="tv_stand.png" alt="TV Stand"></div>
+    <div class="slot" id="slot-tv"><img src="tv.png" alt="TV"></div>
+    <div class="slot" id="slot-plant"><img src="plant.png" alt="Plant"></div>
+    <div class="slot" id="slot-frame"><img src="frame.png" alt="Wall Frame"></div>
   </div>
 </body>
-</html>
+</html> 
