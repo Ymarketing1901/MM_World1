@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workshop - Couches</title>
+  <style>
+    body {
+      background: #fafafa;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .couch-slot {
+      width: 256px;
+      height: 448px;
+      background-image: url('couch_sprite_sheet.png');
+      background-size: 3072px 448px;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .couch-slot:hover {
+      transform: scale(1.05);
+      border-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Select a Couch</h1>
+  <div class="shop-grid">
+    <div class="couch-slot" style="background-position: 0 0;"></div>
+    <div class="couch-slot" style="background-position: -256px 0;"></div>
+    <div class="couch-slot" style="background-position: -512px 0;"></div>
+    <div class="couch-slot" style="background-position: -768px 0;"></div>
+    <div class="couch-slot" style="background-position: -1024px 0;"></div>
+    <div class="couch-slot" style="background-position: -1280px 0;"></div>
+    <div class="couch-slot" style="background-position: -1536px 0;"></div>
+    <div class="couch-slot" style="background-position: -1792px 0;"></div>
+    <div class="couch-slot" style="background-position: -2048px 0;"></div>
+    <div class="couch-slot" style="background-position: -2304px 0;"></div>
+    <div class="couch-slot" style="background-position: -2560px 0;"></div>
+    <div class="couch-slot" style="background-position: -2816px 0;"></div>
+  </div>
+</body>
+</html>
