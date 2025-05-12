@@ -1,6 +1,5 @@
 
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,66 +14,63 @@
       display: flex;
       justify-content: center;
       align-items: center;
-    }
+    }#home {
+  position: relative;
+  width: 1024px;
+  height: 1536px;
+  background-image: url('background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
-    #home {
-      position: relative;
-      width: 100%;
-      max-width: 768px;
-      aspect-ratio: 2/3;
-      background-image: url('background.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
+.furniture {
+  position: absolute;
+  image-rendering: pixelated;
+}
 
-    .furniture {
-      position: absolute;
-      image-rendering: pixelated;
-    }
+#couch {
+  left: 100px;
+  top: 880px;
+  width: 230px;
+}
 
-    /* Adjusted to use percentages for better scaling */
-    #couch {
-      left: 8%;
-      top: 76%;
-      width: 24%;
-    }
+#table {
+  left: 240px;
+  top: 940px;
+  width: 150px;
+}
 
-    #table {
-      left: 31%;
-      top: 81%;
-      width: 20%;
-    }
+#console {
+  left: 270px;
+  top: 930px;
+  width: 50px;
+}
 
-    #console {
-      left: 35%;
-      top: 80%;
-      width: 7%;
-    }
+#tvstand {
+  left: 460px;
+  top: 890px;
+  width: 160px;
+}
 
-    #tvstand {
-      left: 60%;
-      top: 77%;
-      width: 21%;
-    }
+#tv {
+  left: 475px;
+  top: 800px;
+  width: 140px;
+}
 
-    #tv {
-      left: 62%;
-      top: 69%;
-      width: 18%;
-    }
+#plant {
+  left: 500px;
+  top: 870px;
+  width: 90px;
+}
 
-    #plant {
-      left: 65%;
-      top: 75%;
-      width: 12%;
-    }
+#frame {
+  left: 540px;
+  top: 420px;
+  width: 100px;
+}
 
-    #frame {
-      left: 70%;
-      top: 36%;
-      width: 13%;
-    }
   </style>
 </head>
 <body>
@@ -88,4 +84,4 @@
     <img src="frame.png" class="furniture" id="frame" alt="Wall Frame">
   </div>
 </body>
-</html>
+</html> 
