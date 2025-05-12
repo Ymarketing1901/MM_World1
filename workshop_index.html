@@ -1,56 +1,94 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Workshop - Couches</title>
+  <title>Math Magic Store</title>
   <style>
     body {
-      background: #fafafa;
+      margin: 0;
       font-family: sans-serif;
+      background: #f0f0f0;
       padding: 20px;
+      box-sizing: border-box;
     }
 
-    .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      max-width: 1000px;
-      margin: auto;
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    .couch-slot {
-      width: 256px;
-      height: 448px;
-      background-image: url('couch_sprite_sheet.png');
-      background-size: 3072px 448px;
-      border: 2px solid #ccc;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
+    .coin-counter {
+      font-size: 18px;
+      font-weight: bold;
     }
 
-    .couch-slot:hover {
-      transform: scale(1.05);
-      border-color: #333;
+    h2 {
+      margin-top: 40px;
+      font-size: 24px;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      padding: 10px 0;
+    }
+
+    .item {
+      width: 300px;
+      height: 200px;
+      background: #ddd;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #333;
     }
   </style>
 </head>
 <body>
-  <h1>Select a Couch</h1>
-  <div class="shop-grid">
-    <div class="couch-slot" style="background-position: 0 0;"></div>
-    <div class="couch-slot" style="background-position: -256px 0;"></div>
-    <div class="couch-slot" style="background-position: -512px 0;"></div>
-    <div class="couch-slot" style="background-position: -768px 0;"></div>
-    <div class="couch-slot" style="background-position: -1024px 0;"></div>
-    <div class="couch-slot" style="background-position: -1280px 0;"></div>
-    <div class="couch-slot" style="background-position: -1536px 0;"></div>
-    <div class="couch-slot" style="background-position: -1792px 0;"></div>
-    <div class="couch-slot" style="background-position: -2048px 0;"></div>
-    <div class="couch-slot" style="background-position: -2304px 0;"></div>
-    <div class="couch-slot" style="background-position: -2560px 0;"></div>
-    <div class="couch-slot" style="background-position: -2816px 0;"></div>
+  <header>
+    <h1>Magic Store</h1>
+    <div class="coin-counter">Coins: <span id="coin-count">0</span></div>
+  </header>
+
+  <h2>Couch</h2>
+  <div class="carousel" id="carousel-couch">
+    <div class="item">Couch 1</div>
+    <div class="item">Couch 2</div>
+    <div class="item">Couch 3</div>
   </div>
+
+  <h2>Picture Frame</h2>
+  <div class="carousel" id="carousel-frame">
+    <div class="item">Frame 1</div>
+    <div class="item">Frame 2</div>
+    <div class="item">Frame 3</div>
+  </div>
+
+  <h2>Plant</h2>
+  <div class="carousel" id="carousel-plant">
+    <div class="item">Plant 1</div>
+    <div class="item">Plant 2</div>
+    <div class="item">Plant 3</div>
+  </div>
+
+  <script>
+    // Load coin count from localStorage (reuses your game's coin system)
+    const coinDisplay = document.getElementById('coin-count');
+    function updateCoins() {
+      const coins = parseInt(localStorage.getItem('mm-coins') || '0');
+      coinDisplay.textContent = coins;
+    }
+    updateCoins();
+  </script>
 </body>
-</html>
+</html> 
