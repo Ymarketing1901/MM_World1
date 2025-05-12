@@ -14,15 +14,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-    }#scaler {
-  transform-origin: top left;
-  transform: scale(0.5); /* This will be overridden by JS */
-}
-
-#home {
+    }#home {
   position: relative;
-  width: 1024px;
-  height: 1536px;
+  width: 100vw;
+  aspect-ratio: 2 / 3;
+  max-width: 1024px;
   background-image: url('background.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -79,28 +75,14 @@
   </style>
 </head>
 <body>
-  <div id="scaler">
-    <div id="home">
-      <img src="couch.png" class="furniture" id="couch" alt="Couch">
-      <img src="coffee_table.png" class="furniture" id="table" alt="Table">
-      <img src="console.png" class="furniture" id="console" alt="Console">
-      <img src="tv_stand.png" class="furniture" id="tvstand" alt="TV Stand">
-      <img src="tv.png" class="furniture" id="tv" alt="TV">
-      <img src="plant.png" class="furniture" id="plant" alt="Plant">
-      <img src="frame.png" class="furniture" id="frame" alt="Wall Frame">
-    </div>
+  <div id="home">
+    <img src="couch.png" class="furniture" id="couch" alt="Couch">
+    <img src="coffee_table.png" class="furniture" id="table" alt="Table">
+    <img src="console.png" class="furniture" id="console" alt="Console">
+    <img src="tv_stand.png" class="furniture" id="tvstand" alt="TV Stand">
+    <img src="tv.png" class="furniture" id="tv" alt="TV">
+    <img src="plant.png" class="furniture" id="plant" alt="Plant">
+    <img src="frame.png" class="furniture" id="frame" alt="Wall Frame">
   </div>
-  <script>
-    function scaleToFit() {
-      const scaler = document.getElementById('scaler');
-      const scale = Math.min(
-        window.innerWidth / 1024,
-        window.innerHeight / 1536
-      );
-      scaler.style.transform = `scale(${scale})`;
-    }
-    window.addEventListener('resize', scaleToFit);
-    window.addEventListener('load', scaleToFit);
-  </script>
 </body>
-</html>
+</html> 
