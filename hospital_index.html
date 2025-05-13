@@ -118,11 +118,11 @@
   </a>
 
   <script>
-   const save = JSON.parse(localStorage.getItem("mathMagicSave") || "{}");
-const grade = parseInt(save.grade || "1");
-const land = parseInt(save.currentLand || "1");
+   const rawSave = JSON.parse(localStorage.getItem("mathMagicSave") || "{}");
+const grade = parseInt(rawSave.grade || "1");
+const land = parseInt(rawSave.currentLand || "1");
     const difficulty = Math.min(Math.max(land, 1), 5);
-    const save = getSave();
+    const save = getSave(); // used for hospital progress, not grade
 
     let score = 0;
     let correctAnswers = save.hospitalProgress?.[land]?.correct || 0;
@@ -135,15 +135,8 @@ const land = parseInt(save.currentLand || "1");
     }
 
     function generateQuestion() {
-      const a = randomInt(10, 99);
-      const b = randomInt(10, 99);
-      const answer = a + b;
-      const decoys = new Set([answer + 10, answer - 10]);
-      while (decoys.size < 3) {
-        const offset = Math.floor(Math.random() * 11) - 5;
-        const decoy = answer + offset;
-        if (decoy !== answer && decoy > 0) decoys.add(decoy);
-      }
+  return window.generateQuestion(grade, difficulty);
+}
       const options = Array.from(decoys);
       options.push(answer);
       return {
