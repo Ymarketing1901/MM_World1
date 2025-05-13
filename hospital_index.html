@@ -118,8 +118,9 @@
   </a>
 
   <script>
-    const grade = parseInt(localStorage.getItem("selectedGrade") || "1");
-const land = parseInt(localStorage.getItem("selectedLand") || "1");
+   const save = JSON.parse(localStorage.getItem("mathMagicSave") || "{}");
+const grade = parseInt(save.grade || "1");
+const land = parseInt(save.currentLand || "1");
     const difficulty = Math.min(Math.max(land, 1), 5);
     const save = getSave();
 
