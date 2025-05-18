@@ -4,22 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Math Magic - Hospital</title>
-  <script src="coinEngine.js"></script>
-  <script src="saveEngine.js"></script>
-  <script src="questionLoader.js"></script>
   <style>
     body {
       font-family: sans-serif;
-      background: url('HospitalF.png') no-repeat center center fixed;
-      background-size: cover;
+      background: #fff8e1;
       text-align: center;
       padding: 40px;
     }
     h1 {
       font-size: 32px;
       margin-bottom: 20px;
-      color: white;
-      text-shadow: 2px 2px 4px #000;
     }
     #question-box {
       font-size: 24px;
@@ -41,45 +35,14 @@
       margin-top: 20px;
       font-size: 20px;
       font-weight: bold;
-      color: white;
-      text-shadow: 1px 1px 2px #000;
     }
     #coin-box {
       font-size: 18px;
       margin-top: 30px;
-      color: white;
-    }
-    #lab-link {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #fff;
-      color: #000;
-      padding: 10px 15px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      align-items: center;
-    }
-    #lab-link img {
-      width: 24px;
-      height: 24px;
-      margin-right: 8px;
-    }
-    .coin-animate {
-      position: absolute;
-      right: 10px;
-      top: 0;
-      color: gold;
-      font-size: 20px;
-      animation: popUp 1s ease-out forwards;
-    }
-    @keyframes popUp {
-      0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-20px); }
     }
   </style>
+  <script src="global.js"></script>
+  <script src="questionLoader.js"></script>
 </head>
 <body>
   <h1>Hospital: Solve for Coins!</h1>
@@ -87,38 +50,26 @@
   <div id="options-box"></div>
   <div id="feedback"></div>
   <div id="coin-box">Coins: 0 | Questions Solved: 0 / 20</div>
-  <a id="lab-link" href="lab_index.html">
-    <img src="lab-link.png" alt="Lab Icon" />
-    Enter Science Lab
-  </a>
 
   <script>
-    const save = getSave();
-    const rawSave = JSON.parse(localStorage.getItem("mathMagicSave") || "{}");
-    const grade = parseInt(rawSave.grade || "1");
-    const land = parseInt(rawSave.currentLand || "1");
-    const difficulty = Math.min(Math.max(land, 1), 5);
-
-    let index = save.hospitalProgress?.[land]?.correct || 0;
-    let coins = loadCoins();
+    let index = 0;
+    let coins = 0;
     let questions = [];
-    let current;
 
     function loadQuestion() {
       if (index >= 20) {
         document.getElementById("question-box").textContent = "You've completed the Hospital!";
         document.getElementById("options-box").innerHTML = "";
         document.getElementById("feedback").textContent = "Science Lab Unlocked!";
-        document.getElementById("lab-link").style.display = "flex";
         markHospitalComplete();
         return;
       }
 
-      current = questions[index];
-      document.getElementById("question-box").textContent = current.text;
+      const q = questions[index];
+      document.getElementById("question-box").textContent = q.text;
       const optionsBox = document.getElementById("options-box");
       optionsBox.innerHTML = "";
-      current.options.forEach(opt => {
+      q.options.forEach(opt => {
         const btn = document.createElement("button");
         btn.className = "option";
         btn.textContent = opt;
@@ -129,35 +80,24 @@
     }
 
     function submitAnswer(selected) {
-      const correct = current.answer;
+      const correct = questions[index].answer;
       if (selected === correct) {
+        coins++;
         index++;
-        coins += 2;
-        document.getElementById("feedback").textContent = "Correct! +2 coins";
-        addCoins(2);
-        logProgress("hospital", land, index);
-        animateCoin();
+        document.getElementById("feedback").textContent = "Correct!";
+        addCoin();
       } else {
-        document.getElementById("feedback").textContent = `Oops! The answer was ${correct}`;
-        index++;
+        document.getElementById("feedback").textContent = "Try again.";
+        return;
       }
-
-      document.getElementById("coin-box").textContent = `Coins: ${coins} | Questions Solved: ${index} / 20`;
-      setTimeout(loadQuestion, 1500);
+      document.getElementById("coin-box").textContent = Coins: ${coins} | Questions Solved: ${index} / 20;
+      loadQuestion();
     }
 
-    function animateCoin() {
-      const coinBox = document.getElementById("coin-box");
-      const coinPlus = document.createElement("div");
-      coinPlus.className = "coin-animate";
-      coinPlus.textContent = "+2";
-      coinBox.appendChild(coinPlus);
-      setTimeout(() => coinPlus.remove(), 1000);
-    }
-
+    const grade = localStorage.getItem("mathMagicGrade") || "1";
     getQuestionSet({
       grade,
-      land,
+      land: 1,
       building: "hospital",
       callback: (loadedQuestions) => {
         questions = loadedQuestions;
