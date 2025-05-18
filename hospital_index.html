@@ -297,7 +297,7 @@ function parsePattern(description) {
   return { op, min, max };
 }
 
-function generateQuestion(grade, level) {
+function buildQuestion(grade, level) {
   const levelKey = "level_" + level;
   const gradeData = gradeLogic[grade];
   if (!gradeData) return fallbackQuestion();
@@ -352,7 +352,7 @@ function fallbackQuestion() {
 
 
 function generateQuestion() {
-  return generateQuestion(grade, difficulty);
+  return buildQuestion(grade, difficulty);
 }
       const options = Array.from(decoys);
       options.push(answer);
